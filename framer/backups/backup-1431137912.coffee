@@ -60,7 +60,7 @@ circlebtn.on Events.Click, ->
 		cirleMask = "on"
 		#Circular animatino goes here		
 	else
-		maskEnd.start()
+		animationB.start()
 		cirleMask = "off"
 		
 

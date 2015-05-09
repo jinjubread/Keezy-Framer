@@ -1,6 +1,6 @@
 colourArray = ["#6B0C22","#D9042B","#F4CB89","#588C8C","#011C26","#F77A52","#BEEF00", "#DEAD00"]
-rows = 2
-cols = 4
+cols = 2
+rows = 4
 
 width  = Screen.width / cols
 height = Screen.height / rows
@@ -21,3 +21,4 @@ for rowIndex in [0..rows-1]
 		
 		if itemCount > colourArray.length - 1
 			itemCount = 0
+print "huhuhu"			
