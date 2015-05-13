@@ -55,7 +55,19 @@ maskStart = new Animation({
  })
 
 maskEnd = maskStart.reverse()
+# Close btns
+close = new Layer
+	scale:0.8, image:"images/close.png", opacity:0
+close.center()
 
+closeAnimation = new Animation({
+	layer: close,
+	properties: {opacity:1,rotationZ:180},
+	time: 0.5,    
+	curve: "spring(200,15,0)"
+})
+
+closeEnd = closeAnimation.reverse()
 # Circle btns
 distance = 200
 
@@ -78,84 +90,38 @@ m80anime = new Animation({
 m8 = m80anime.reverse()
 
 # Circle btns - 2
-m81 = new Layer
-	width: 120
-	height: 120
-	opacity: 0
-	backgroundColor: "transparent"
-	shadowSpread: 4
-	shadowColor: "#E74C3C" 
-m81.center()
-m81x = m81.x
-m81y = m81.y
+numCircles = 5
+radius = 250
+circleSize = 200
 
-m81anime = new Animation({
-	layer: m81,
-	properties: {opacity: 1, y: m81.y + distance, rotationZ: 220, scale:1.5, cornerRadius: 90},	time: 0.5,
-	originX: m81x,
-})
-m81r = m81anime.reverse()
-
-# Circle btns - 3
-m82 = new Layer
-	width: 120
-	height: 120
-	opacity: 0
-	backgroundColor: "transparent"
-	shadowSpread: 4
-	shadowColor: "#FFFF9D" 
-m82.center()
-m82x = m82.x
-m82y = m82.y
-
-m82anime = new Animation({
-	layer: m82,
-	properties: {opacity: 1, x: m82.x - distance, rotationZ: 220, scale:1.5, cornerRadius: 90},	time: 0.5,
-	originX: m82x,
-})
-m82r = m82anime.reverse()
-
-# Circle btns - 4
-m83 = new Layer
-	width: 120
-	height: 120
-	opacity: 0
-	backgroundColor: "transparent"
-	shadowSpread: 4
-	shadowColor: "#979C9C" 
-m83.center()
-m83x = m83.x
-m83y = m83.y
-
-m83anime = new Animation({
-	layer: m83,
-	properties: {opacity: 1, x: m83.x + distance, rotationZ: 220, scale:1.5, cornerRadius: 90},	time: 0.5,
-	originX: m83x,
-})
-m83r = m83anime.reverse()
+for i in [0...numCircles]
+	circle = new Layer
+		width: circleSize
+		height: circleSize
+		midX: radius*Math.cos(i/numCircles*2*Math.PI - 0.5*Math.PI)
+		midY: radius*Math.sin(i/numCircles*2*Math.PI - 0.5*Math.PI)
+		borderRadius: "50%"
+		backgroundColor: "transparent"
+		shadowSpread: 4
+		shadowColor: "hsla(#{i/numCircles*360},80%,50%,1)"
+	circle.midX += Screen.width/2 
+	circle.midY += Screen.height/2 
 	
+print circle.midX
+		
 # Events
 circlebtn.on Events.Click, ->
 	if 	cirleMask is "off"
 		maskStart.start()
 		cirleMask = "on"
-		m80anime.start()
-		m81anime.start()
-		m82anime.start()
-		m83anime.start()
-		
+		closeAnimation.start()
+
 		circleClicked.start()
 		#Circular animatino goes here		
 	else
 		maskEnd.start()
-		m8.start()
-		m81r.start()
-		m82r.start()
-		m83r.start()
+		closeEnd.start()
 		revCircleClicked.start()
 		cirleMask = "off"
-		
-
-
 		
 
